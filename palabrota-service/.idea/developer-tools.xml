@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DeveloperToolsToolWindowSettingsV1" lastSelectedContentNodeId="uuid-generator">
+    <developerToolsConfigurations>
+      <developerToolConfiguration developerToolId="text-format-converter" id="b06b21a1-f991-41d0-9cdb-c4dbc90fef6f" name="Workbench">
+        <properties>
+          <property key="sourceText" type="INPUT" value="kotlin.String|WordSearch:&#10;      value:&#10;        word: 'hablar'&#10;        origin: 'Del lat. fabulāri.'&#10;        meanings:&#10;          - definitions: '1. intr. Emitir palabras.Sin.:comunicar, expresar, decir1, proferir, enunciar, pronunciar, resollar, locutar.[en voz alta] gritar, vocear, clamar, exclamar.[en voz baja] susurrar, murmurar, cuchichear, musitar, bisbisear.[con dificultad] balbucir, tartamudear, gaguear, trabarse, cancanear.Ant.:callar.'&#10;            descriptions: 'comunicar, expresar, decir1, proferir, enunciar, pronunciar, resollar, locutar'&#10;            category: 'verb'&#10;            synonyms:&#10;              - 'comunicar'&#10;              - 'expresar'&#10;            antonyms:&#10;              - 'callar'&#10;          - definitions: '2. intr. Dicho de ciertas aves: Imitar las articulaciones de la voz humana.'&#10;            category: 'verb'&#10;            descriptions: 'Dicho de ciertas aves: Imitar las articulaciones de la voz humana'&#10;            synonyms:&#10;            antonyms:" />
+          <property key="secondLanguage" type="CONFIGURATION" value="dev.turingcomplete.intellijdevelopertoolsplugin._internal.tool.ui.converter.CodeFormattingConverter$Language|JSON" />
+          <property key="targetText" type="INPUT" value="kotlin.String|{&quot;WordSearch&quot;:{&quot;value&quot;:{&quot;word&quot;:&quot;hablar&quot;,&quot;origin&quot;:&quot;Del lat. fabulāri.&quot;,&quot;meanings&quot;:[{&quot;definitions&quot;:&quot;1. intr. Emitir palabras.Sin.:comunicar, expresar, decir1, proferir, enunciar, pronunciar, resollar, locutar.[en voz alta] gritar, vocear, clamar, exclamar.[en voz baja] susurrar, murmurar, cuchichear, musitar, bisbisear.[con dificultad] balbucir, tartamudear, gaguear, trabarse, cancanear.Ant.:callar.&quot;,&quot;descriptions&quot;:&quot;comunicar, expresar, decir1, proferir, enunciar, pronunciar, resollar, locutar&quot;,&quot;category&quot;:&quot;verb&quot;,&quot;synonyms&quot;:[&quot;comunicar&quot;,&quot;expresar&quot;],&quot;antonyms&quot;:[&quot;callar&quot;]},{&quot;definitions&quot;:&quot;2. intr. Dicho de ciertas aves: Imitar las articulaciones de la voz humana.&quot;,&quot;category&quot;:&quot;verb&quot;,&quot;descriptions&quot;:&quot;Dicho de ciertas aves: Imitar las articulaciones de la voz humana&quot;,&quot;synonyms&quot;:null,&quot;antonyms&quot;:null}]}}}" />
+          <property key="firstLanguage" type="CONFIGURATION" value="dev.turingcomplete.intellijdevelopertoolsplugin._internal.tool.ui.converter.CodeFormattingConverter$Language|YAML" />
+        </properties>
+      </developerToolConfiguration>
+    </developerToolsConfigurations>
+    <expandedGroupNodeIds />
+  </component>
+</project>

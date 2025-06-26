@@ -1,0 +1,28 @@
+server: 
+  port: 8081
+  servlet:
+    context-path: /palabrota/v1
+
+spring:
+  security:
+    oauth2:
+      tokenValidation: false
+      disabled: true
+  h2:
+    console.enabled: true
+  datasource:
+    url: jdbc:h2:mem:palabrota
+    username: word
+    password: word123
+    driverClassName: org.h2.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+
+difficulties-levels:
+  letters: 5-4,7-6,9-8,20-3
+  attempts: 4,6,10
+
+logging:
+  level:
+    root: ERROR
+    com.riu: INFO

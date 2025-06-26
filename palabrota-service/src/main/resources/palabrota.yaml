@@ -1,0 +1,446 @@
+openapi: 3.0.3
+info:
+  version: 1.0.0
+  title: 'palabrota'
+  description: "API for managing palabrotas' games."
+  contact:
+    name: Marc Sans
+    email: msans@riu.com
+servers:
+  - url: 'https://palabrota-svc.practice-{environment}.svc.cluster.local:8080/{basePath}'
+    description: Staging Environment
+    variables:
+      basePath:
+        default: palabrota/v1
+      environment:
+        default: dev
+        enum:
+          - dev
+          - int
+          - uat
+          - pre
+    x-internal: true
+tags:
+  - name: Word
+    description: Endpoints used to manage palabrotas' games.
+paths:
+  /new-game:
+    post:
+      tags:
+        - Word
+      summary: Create a new game
+      description: Create a new game defined by the request body.
+      operationId: create-new-game
+      requestBody:
+        $ref: '#/components/requestBodies/NewGame'
+      responses:
+        '200':
+          $ref: '#/components/responses/NewGame'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /daily:
+    get:
+      tags:
+        - Word
+      summary: Get the daily game
+      description: Get the daily game defined by the daily word from RAE.
+      operationId: get-daily-game
+      responses:
+        '200':
+          $ref: '#/components/responses/NewGame'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /attempt/:
+    post:
+      tags:
+        - Word
+      summary: Do attempt
+      description: Make an attempt to guess the word in the game.
+      operationId: do-attempt
+      requestBody:
+        $ref: '#/components/requestBodies/DoAttempt'
+      responses:
+        '200':
+          $ref: '#/components/responses/ReturnAttempt'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /search-word/{word}:
+    get:
+      tags:
+        - Word
+      summary: Get a word
+      description: Get a word from the RAE dictionary
+      operationId: get-word
+      parameters:
+        - $ref: '#/components/parameters/WordRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/WordResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+components:
+  examples:
+    NewGameRequest:
+      value:
+        word: 4
+        attempts: 2
+    NewGameResponse:
+      value:
+        uuid: '123e4567-e89b-12d3-a456-426614174000'
+        word: 'salta'
+        game-settings:
+          letters: 4
+          attempts: 5
+    DoAttempt:
+      value:
+        uuid: '123e4567-e89b-12d3-a456-426614174000'
+        word: 'casas'
+        attempt: 1
+    ReturnAttempt:
+      value:
+        uuid: '123e4567-e89b-12d3-a456-426614174000'
+        word: 'casas'
+        attempts-left: 4
+        result:
+          - letter: 'c'
+            status: 0
+          - letter: 'a'
+            status: 2
+          - letter: 's'
+            status: 1
+          - letter: 'a'
+            status: 2
+          - letter: 's'
+            status: 0
+    WordSearch:
+      value:
+        word: 'hablar'
+        origin: 'Del lat. fabulāri.'
+        meanings:
+          - definitions: '1. intr. Emitir palabras.Sin.:comunicar, expresar, decir1, proferir, enunciar, pronunciar, resollar, locutar.[en voz alta] gritar, vocear, clamar, exclamar.[en voz baja] susurrar, murmurar, cuchichear, musitar, bisbisear.[con dificultad] balbucir, tartamudear, gaguear, trabarse, cancanear.Ant.:callar.'
+            descriptions: 'comunicar, expresar, decir1, proferir, enunciar, pronunciar, resollar, locutar'
+            category: 'verb'
+            synonyms:
+              - 'comunicar'
+              - 'expresar'
+            antonyms:
+              - 'callar'
+          - definitions: '2. intr. Dicho de ciertas aves: Imitar las articulaciones de la voz humana.'
+            category: 'verb'
+            descriptions: 'Dicho de ciertas aves: Imitar las articulaciones de la voz humana'
+            synonyms:
+            antonyms:
+
+  parameters:
+    WordRequest:
+      name: word
+      in: path
+      description: The word to search in the RAE dictionary
+      required: true
+      schema:
+        type: string
+        maxLength: 40
+        pattern: ^[\w\sáéíóúüñÁÉÍÓÚÜÑ-]{1,40}$
+      example: "hablar"
+  requestBodies:
+    NewGame:
+      description: Request body with the guest's personal information to be registered or updated in the database
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/NewGameRequest'
+          examples:
+            NewGame request:
+              $ref: '#/components/examples/NewGameRequest'
+    DoAttempt:
+      description: Request body with the guest's personal information to be registered or updated in the database
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/DoAttempt'
+          examples:
+            Attempt request:
+              $ref: '#/components/examples/DoAttempt'
+  responses:
+    NewGame:
+      description: Response that contains the characteristics of the new game created.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/NewGameResponse'
+          examples:
+            NewGame response:
+              $ref: '#/components/examples/NewGameResponse'
+    WordResponse:
+      description: Response that contains the word searched in the RAE dictionary.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/WordSearch'
+          examples:
+            Attempt response:
+              $ref: '#/components/examples/WordSearch'
+    ReturnAttempt:
+      description: Response that contains the guest's personal information registered or updated.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ReturnAttempt'
+          examples:
+            Attempt response:
+              $ref: '#/components/examples/ReturnAttempt'
+    BadRequest:
+      description: 400 - Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            BadRequest:
+              value:
+                code: PALABROTA-ERROR-00400
+                message: Bad request.
+    Unauthorized:
+      description: 401 - Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            Unauthorized:
+              value:
+                code: PALABROTA-ERROR-00401
+                message: Unauthorized.
+    Forbidden:
+      description: 403 - Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            Forbidden:
+              value:
+                code: PALABROTA-ERROR-00403
+                message: Forbidden.
+    NotFound:
+      description: 404 - Not Found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            NotFound:
+              value:
+                code: PALABROTA-ERROR-00404
+                message: Not found.
+    InternalServerError:
+      description: 500 - Internal Server Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            InternalServerError:
+              value:
+                code: PALABROTA-ERROR-00500
+                message: Internal Server Error
+  schemas:
+    NewGameRequest:
+      type: object
+      description: New games, based of the difficulty.
+      properties:
+        word:
+          type: integer
+          description: Level of difficulty for the word (not the number of letters in the word).
+        attempts:
+          type: integer
+          description: Level of number of attempts allowed for the game (not the number of attempts in the game).
+      required:
+        - word
+        - attempts
+    NewGameResponse:
+      type: object
+      description: New games, based of the difficulty.
+      properties:
+        uuid:
+          type: string
+          format: uuid
+          description: Unique identifier of the game.
+        word:
+          type: string
+          description: The word to guess in the game.
+        game-settings:
+          $ref: '#/components/schemas/GameSettings'
+      required:
+        - word
+        - game-settings
+    GameSettings:
+      type: object
+      description: Difficulty level of the game.
+      properties:
+        letters:
+          type: integer
+          description: Number of letters in the word.
+        attempts:
+          type: integer
+          description: Number of attempts allowed in the game.
+      required:
+        - letters
+        - attempts
+    DoAttempt:
+      type: object
+      description: Attempt made by the user to guess the word in the game.
+      properties:
+        uuid:
+          type: string
+          format: uuid
+          description: Unique identifier of the game.
+        word:
+          type: string
+          description: The word guessed by the user.
+        attempt:
+          type: integer
+          description: Number of attempts made by the user to guess the word.
+      required:
+        - uuid
+        - word
+        - attempt
+    ReturnAttempt:
+      type: object
+      description: Attempt made by the user to guess the word in the game.
+      properties:
+        uuid:
+          type: string
+          format: uuid
+          description: Unique identifier of the game.
+        word:
+          type: string
+          description: The word guessed by the user.
+        attempts-left:
+          type: integer
+          description: Number of remaining attempts in the game.
+        result:
+          type: array
+          description: The level of correctness of each letter of the word
+          items:
+            $ref: '#/components/schemas/Letter'
+      required:
+        - uuid
+        - word
+        - attempts-left
+        - result
+    Letter:
+      type: object
+      description: Letter guessed by the user in the attempt.
+      properties:
+        letter:
+          type: string
+          description: The letter guessed by the user.
+        status:
+          type: integer
+          description: Status of the letter in the attempt (0 -> not in the word, 1 -> in the word but not in that place, 2 -> in the word and in that place).
+      required:
+        - letter
+        - status
+    WordSearch:
+      type: object
+      description: Word searched in the RAE dictionary.
+      properties:
+        word:
+          type: string
+          description: The word found in the RAE dictionary.
+        origin:
+          type: string
+          description: The origin of the word found in the RAE dictionary.
+        meanings:
+          type: array
+          description: Meanings of the word found in the RAE dictionary.
+          items:
+            $ref: '#/components/schemas/Meanings'
+      required:
+        - word
+        - origin
+        - meanings
+    Meanings:
+      type: object
+      description: Meanings of the word found in the RAE dictionary.
+      properties:
+        definition:
+          type: string
+          description: Definitions of the word found in the RAE dictionary.
+        description:
+          type: string
+          description: Descriptions of the word found in the RAE dictionary.
+        category:
+          type: string
+          description: Category of the word found in the RAE dictionary (e.g., noun, verb, adjective).
+        synonyms:
+          type: array
+          description: Synonyms of the word found in the RAE dictionary.
+          items:
+            type: string
+            description: Synonym of the word.
+        antonyms:
+          type: array
+          description: Antonyms of the word found in the RAE dictionary.
+          items:
+            type: string
+            description: Antonym of the word.
+    Error:
+      type: object
+      description: Generic error model.
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: string
+          maxLength: 40
+          pattern: ^PALABROTA-ERROR-\d{5}$
+          description: Error code with format (PALABROTA-ERROR-XXXXX).
+        message:
+          type: string
+          maxLength: 250
+          pattern: ^[\w\s.]{1,250}$
+          description: Error message.
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: RFC8725 compliant JWT.
+security:
+  - bearerAuth: []
