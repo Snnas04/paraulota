@@ -1,0 +1,23 @@
+div {
+  display: flex;
+  margin: 1rem 0;
+}
+
+input {
+  flex: 1;
+  outline: none;
+  padding: 10px;
+  box-shadow: none;
+  border: 3px solid var(--gray-color);
+  border-radius: var(--border-radius);
+  background-color: var(--gray-color);
+  color: var(--light-color);
+}
+
+input:hover {
+  border: 3px solid var(--primary-color);
+}
+
+input:focus {
+  border: 3px solid var(--primary-hover-color);
+}

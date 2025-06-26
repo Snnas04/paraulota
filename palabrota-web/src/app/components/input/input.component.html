@@ -1,0 +1,12 @@
+<div>
+  <input
+    #inputRef
+    [value]="value"
+    placeholder="{{ fieldName }}"
+    type="text"
+    [attr.maxlength]="maxLength"
+    (input)="onInputChange($event)"
+    (focus)="onFocus($event)"
+    (blur)="onBlur($event)"
+  />
+</div>

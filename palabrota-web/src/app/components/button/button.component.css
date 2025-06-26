@@ -1,0 +1,16 @@
+div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  border-radius: var(--border-radius);
+  color: var(--light-color);
+  background-color: var(--primary-color);
+  font-weight: 500;
+}
+
+div:hover {
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  background-color: var(--primary-hover-color);
+}

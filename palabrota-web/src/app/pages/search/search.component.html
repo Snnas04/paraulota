@@ -1,0 +1,35 @@
+<div class="content">
+  <div class="input-button-row">
+    <app-input
+      [fieldName]="'hamburguesa'"
+      [(value)]="value"
+      (keydown.enter)="showWordMeaning(value)"
+    ></app-input>
+    <app-button [text]="'Buscar'" (click)="showWordMeaning(value)"></app-button>
+  </div>
+  <div class="word" *ngIf="wordData">
+    <h2>{{ wordData.word.toUpperCase() }}</h2>
+    <div class="origin" *ngIf="wordData.origin">
+      <strong>Origen:</strong> {{ wordData.origin }}
+    </div>
+    <div class="word-definition-list">
+      <div class="word-definition" *ngFor="let meaning of wordData.meanings">
+        <p>
+          <span><strong>Definición: </strong>{{ meaning.definition }}</span>
+          <span *ngIf="meaning.category && meaning.category.length">
+            <br />
+            <em>Categoria:</em> {{ meaning.category }}
+          </span>
+          <span *ngIf="meaning.synonyms && meaning.synonyms.length">
+            <br />
+            <em>Sinónimos:</em> {{ meaning.synonyms.join(', ') }}
+          </span>
+          <span *ngIf="meaning.antonyms && meaning.antonyms.length">
+            <br />
+            <em>Antónimos:</em> {{ meaning.antonyms.join(', ') }}
+          </span>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

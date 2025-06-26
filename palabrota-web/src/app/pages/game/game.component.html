@@ -1,0 +1,78 @@
+<div class="content">
+  <table class="game-grid" (click)="focusHiddenInput()">
+    <tbody>
+      <tr
+        *ngFor="
+          let _ of [].constructor(gameData!['game-settings'].attempts);
+          let attemptIndex = index
+        "
+      >
+        <td
+          *ngFor="
+            let __ of [].constructor(gameData!['game-settings'].letters);
+            let letterIndex = index
+          "
+        >
+          <p [ngClass]="getCellClass(attemptIndex, letterIndex)">
+            {{
+              gameState.inputValue[attemptIndex]
+                ? gameState.inputValue[attemptIndex][letterIndex] === ' '
+                  ? '_'
+                  : gameState.inputValue[attemptIndex][letterIndex]
+                : ''
+            }}
+          </p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="actions" *ngIf="!gameState.lose && !gameState.win">
+    <app-input
+      #hiddenInput
+      class="input"
+      [fieldName]="'Guess your word'"
+      [maxLength]="this.gameConfigurationState.settings!.letters"
+      [value]="currentInput"
+      (valueChange)="onInputValueChange($event)"
+      (focus)="onInputFocus()"
+      (blur)="onInputBlur()"
+      (selectionChange)="onInputSelectionChange($event)"
+      (keydown.enter)="sendAttempt()"
+      (keydown)="onInputKeyDown($event)"
+    />
+    <button class="btn" id="send-btn" (click)="sendAttempt()">Enviar</button>
+  </div>
+  <div *ngIf="gameState.lose || gameState.win" class="end-message">
+    @if (gameState.lose) {
+      <h2 id="lose-message-title">¡Has perdido!</h2>
+      <div id="lose-message">
+        La palabra objetivo era:
+        <app-link-button
+          [text]="gameData!.word"
+          (linkClick)="navigation.goToSearchWithWord($event)"
+        ></app-link-button>
+      </div>
+    }
+    @if (gameState.win) {
+      <h2 id="win-message-title">¡Has ganado!</h2>
+    }
+    <div class="btns">
+      <app-custom-button
+        class="btn"
+        [text]="'Volver al inicio'"
+        [color]="'#252f38'"
+        [textColor]="'#eaf5f7'"
+        (buttonClick)="navigation.goToHome()"
+      />
+      <app-custom-button
+        *ngIf="!daily"
+        class="btn"
+        [text]="'Volver a jugar'"
+        [color]="gameState.lose ? '#f73131' : '#0ec52d'"
+        [textColor]="'#252f38'"
+        (buttonClick)="navigation.goToNewGame(createGame)"
+      />
+    </div>
+  </div>
+</div>

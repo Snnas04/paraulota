@@ -1,0 +1,15 @@
+div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 0.5rem;
+  color: var(--light-color);
+  border-bottom: 0.2rem solid var(--dark-secundary-color);
+  width: fit-content;
+}
+
+div:hover {
+  cursor: pointer;
+  border-bottom: 0.2rem solid var(--primary-hover-color);
+  transition: border-bottom 0.3s ease-in-out;
+}

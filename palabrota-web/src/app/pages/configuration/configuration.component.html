@@ -1,0 +1,163 @@
+<div class="content">
+  <div class="left-menu">
+    <h4>configuración</h4>
+    <div class="menu-options">
+      <button
+        class="menu-btn"
+        [ngClass]="{ selected: general }"
+        (click)="
+          general = true;
+          appearance = false;
+          rule = false;
+          gameMode = false;
+          features = false
+        "
+      >
+        General
+      </button>
+      <button
+        class="menu-btn"
+        [ngClass]="{ selected: appearance }"
+        (click)="
+          general = false;
+          appearance = true;
+          rule = false;
+          gameMode = false;
+          features = false
+        "
+      >
+        Apariencia
+      </button>
+    </div>
+    <h4>funcionamiento</h4>
+    <div class="menu-options">
+      <button
+        class="menu-btn"
+        [ngClass]="{ selected: rule }"
+        (click)="
+          general = false;
+          appearance = false;
+          rule = true;
+          gameMode = false;
+          features = false
+        "
+      >
+        Normas
+      </button>
+      <button
+        class="menu-btn"
+        [ngClass]="{ selected: gameMode }"
+        (click)="
+          general = false;
+          appearance = false;
+          rule = false;
+          gameMode = true;
+          features = false
+        "
+      >
+        Modos de juego
+      </button>
+      <button
+        class="menu-btn"
+        [ngClass]="{ selected: features }"
+        (click)="
+          general = false;
+          appearance = false;
+          rule = false;
+          gameMode = false;
+          features = true
+        "
+      >
+        Funcionalidades
+      </button>
+    </div>
+  </div>
+  <div class="options">
+    <div *ngIf="general" class="option" id="general">
+      <h3>Dificultad</h3>
+      <div class="inner-option">
+        <div class="option-explain">
+          <p>Selecciona la dificultad deseada.</p>
+          <p id="diff-explain">
+            Varia la cantidad de letras que puede tener la palabra y la cantidad
+            de intentos para adivinar dicha palabra.
+          </p>
+        </div>
+        <app-burger-menu
+          [options]="difficultyLabels"
+          [selected]="selectedDifficulty.label"
+          (selectionChange)="onDifficultyChange($event)"
+        />
+      </div>
+    </div>
+    <div *ngIf="appearance" class="option" id="appearance">
+      <h3>Color</h3>
+      <div class="appearance-option">
+        <div>Modifica le color principal de la web</div>
+        <img src="reset.png" alt="reset" (click)="onResetPrimaryColor()" />
+        <input
+          class="color-selector"
+          type="color"
+          [value]="primaryColor"
+          (input)="onPrimaryColorChange($event)"
+        />
+      </div>
+    </div>
+    <div *ngIf="rule" class="option" id="game-rule">
+      <h3>Objetivo</h3>
+      <div>
+        <p>
+          Se tiene que insertar una palabra que rellene todos los huecos.<br />Una
+          vez enviada se colorea, cada color tiene un significado.
+        </p>
+        <div class="color-grid">
+          <div class="each-color">
+            <h2 class="color" id="cell-correct">m</h2>
+            <div>Verde: Está en el lugar correcto</div>
+          </div>
+          <div class="each-color">
+            <h2 class="color" id="cell-present">s</h2>
+            <div>
+              Naranja: Está presente en la palabra objectivo, pero mal
+              posicionada
+            </div>
+          </div>
+          <div class="each-color">
+            <h2 class="color" id="cell-absent">v</h2>
+            <div>Gris: No se encuentra en la palabra objetivo</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="gameMode" class="option">
+      <h3>Modos de Juego</h3>
+      <div class="inner-option">
+        <div>
+          <div class="game-mode">Normal</div>
+          <p>
+            Se genera una palabra<br />respecto a la dificultad<br />seleccionada
+            y se tiene<br />que adivinar en un número<br />determinado de
+            intentos.
+          </p>
+        </div>
+        <div>
+          <div class="game-mode">Diario</div>
+          <p>
+            Cada dia hay una palabra<br />y se tiene que adivinar,<br />no
+            afecta la dificultad<br />que tengamos seleccionada.<br />Simpre hay
+            seis intentos.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="features" class="option">
+      <h3>Buscar</h3>
+      <div class="inner-option">
+        <p>
+          Se puede buscar la palabra que quieras y ver todas las definicions,
+          sinonimos, antonimos, etc.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

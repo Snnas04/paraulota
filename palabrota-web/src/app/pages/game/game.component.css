@@ -1,0 +1,112 @@
+.game-grid {
+  font-family: var(--grid-letter-font);
+  margin-bottom: 2rem;
+}
+
+.cell-correct {
+  background-color: var(--dark-secundary-color);
+  border: 0.4rem solid var(--cell-correct);
+}
+.cell-present {
+  background-color: var(--dark-secundary-color);
+  border: 0.4rem solid var(--cell-present);
+}
+.cell-absent {
+  background-color: var(--dark-secundary-color);
+  border: 0.4rem solid var(--cell-absent);
+}
+
+.cell-active {
+  animation: blink-border 1s steps(1) infinite;
+}
+
+.end-message {
+  background-color: var(--dark-secundary-color);
+  padding: 0.2rem 2rem;
+  border-radius: var(--border-radius);
+}
+
+.end-message > h2 {
+  font-weight: 700;
+}
+
+.end-message > app-custom-button {
+  padding: 0 2rem;
+}
+
+.input {
+  position: absolute;
+  left: -9999px;
+  opacity: 0;
+}
+
+.btns {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin: 1rem;
+}
+
+#send-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: var(--border-radius);
+  color: var(--light-color);
+  background-color: var(--primary-color);
+  font-weight: 700;
+  font-size: x-large;
+  width: 100%;
+}
+
+#send-btn:hover {
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  background-color: var(--primary-hover-color);
+}
+
+#lose-message-title {
+  color: var(--lose-color);
+}
+
+#lose-message {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  gap: 0.5rem;
+}
+
+#win-message-title {
+  color: var(--win-color);
+}
+
+p {
+  font-size: 3rem;
+
+  background-color: var(--gray-color);
+  padding: 2rem;
+  margin: 1rem 0.2rem;
+  border-radius: var(--border-radius);
+
+  width: 5rem;
+  height: 5.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+@keyframes blink-border {
+  0%,
+  50% {
+    border: 3px solid var(--primary-color);
+  }
+  51%,
+  100% {
+    border: 3px solid var(--primary-blink-color);
+  }
+}

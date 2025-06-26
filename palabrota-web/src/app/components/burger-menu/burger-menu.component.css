@@ -1,0 +1,36 @@
+.content {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  /* background-color: var(--gray-color); */
+  border-radius: var(--border-radius);
+  padding: 0.5rem 1rem;
+  /* box-shadow: 0 2px 6px var(--box-shadow-color); */
+  gap: 0.5rem;
+}
+
+.menu-content label {
+  font-family: var(--title-font);
+  color: var(--primary-color);
+  font-size: 1rem;
+  margin-right: 0.5rem;
+}
+
+select {
+  background-color: var(--gray-color);
+  color: var(--light-color);
+  border: 2px solid var(--primary-color);
+  border-radius: var(--border-radius);
+  padding: 0.25rem 0.75rem;
+  font-family: var(--text-font);
+  font-size: 1rem;
+  outline: none;
+  transition: background 0.2s, border 0.2s;
+}
+
+select:focus, select:hover {
+  background-color: var(--dark-secundary-color);
+  color: var(--light-color);
+  border-color: var(--primary-hover-color);
+  cursor: pointer;
+}

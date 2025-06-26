@@ -1,0 +1,76 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Lato&family=Sono:wght@200..800&display=swap');
+
+:root {
+  --dark-primary-color: #121314;
+  --dark-secundary-color: #181f25;
+  --gray-color: #252f38;
+  --low-profile-color: #3f4b58;
+  --box-shadow-color: #282c31;
+  --light-color: #eaf5f7;
+  --light-hover-color: #d4e2dc;
+  --primary-color: #2d96ec;
+  --primary-blink-color: #2d96ec33;
+  --primary-hover-color: #2d79ec;
+  --lose-color: #f73131;
+  --win-color: #0ec52d;
+  --accent-color: #3ed4ee;
+  --cell-correct: #27b150;
+  --cell-present: #da9311;
+  --cell-absent: #7e7e7e;
+  --border-radius: 8px;
+  --title-font: "Sono", sans-serif;
+  --text-font: "Nunito", sans-serif;
+  --grid-letter-font: "Fredoka", sans-serif;
+}
+
+body {
+  display: block;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  background-color: var(--dark-primary-color);
+  overflow: hidden;
+}
+
+h1 {
+  font-family: var(--title-font);
+  color: var(--primary-color);
+  font-size: 4rem;
+  font-weight: 800;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+
+h2 {
+  font-family: var(--text-font);
+  color: var(--light-color);
+  font-size: x-large;
+  font-weight: 600;
+  font-optical-sizing: auto;
+}
+
+h3 {
+  font-family: var(--text-font);
+  color: var(--light-color);
+  font-size: x-large;
+  font-weight: 500;
+  font-style: normal;
+}
+
+h4 {
+  font-family: var(--text-font);
+  color: var(--low-profile-color);
+  font-size: large;
+  font-weight: 600;
+  font-style: normal;
+
+}
+
+div {
+  font-family: var(--text-font);
+  font-optical-sizing: auto;
+  font-size: medium;
+  font-weight: 400;
+  font-style: normal;
+  color: var(--light-color);
+}

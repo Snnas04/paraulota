@@ -1,0 +1,11 @@
+<div class="content">
+  <div class="logo" (click)="navigation.goToHome()">
+    <img src="open-book.png" alt="Logo" />
+  </div>
+  <div class="title" (click)="navigation.goToHome()">
+    <h1 *ngFor="let character of title">{{ character }}</h1>
+  </div>
+  <div class="config" (click)="navigation.goToConfiguration()">
+    <img src="setting.png" alt="Settings" />
+  </div>
+</div>
